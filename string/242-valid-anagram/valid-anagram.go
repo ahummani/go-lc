@@ -1,20 +1,13 @@
 func isAnagram(s string, t string) bool {
-	if len(s) != len(t) { 
-		return false 
-	}
-
-	characters := map[rune]int{} 
-	for _, character := range s { 
-		characters[character]++ 
-	}
-
-	for _, character := range t {
-		value, exists := characters[character]
-		if !exists || value <= 0 {
-			return false
-		}
-		characters[character]--
-	}
-
-	return true
+    charsA := strings.Split(s,"")
+    charsB := strings.Split(t,"")
+    sort.Strings(charsA)
+    sort.Strings(charsB)
+    sA := strings.Join(charsA, "")
+    sB := strings.Join(charsB, "")
+    // fmt.Println(sA, sB)
+    if sA == sB{
+        return true
+    }
+    return false
 }
