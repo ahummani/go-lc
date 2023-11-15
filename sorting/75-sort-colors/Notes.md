@@ -1,1 +1,1 @@
-<h2>sort-colors Notes</h2><hr>well the solution is simple but noit
+<h2>sort-colors Notes</h2><hr>well the solution is simple but not that 
