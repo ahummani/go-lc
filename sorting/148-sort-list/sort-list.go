@@ -1,27 +1,33 @@
 func sortList(head *ListNode) *ListNode {
-    if head == nil || head.Next == nil {
-        return head
-    }
-    arr := make([]int, 0)
-
-    for head != nil {
-        arr = append(arr, head.Val)
-        head = head.Next
-    }
-
-    //sort it 
-
-    sort.Ints(arr)
-
-    head = nil
-
-    for i:= len(arr)-1; i>=0; i-- {
-        if i == len(arr)-1 { 
-            head = nil
-        }
-        newNode := &ListNode{Val:arr[i]}
-        newNode.Next = head
-        head = newNode
-    }
+  if head==nil || head.Next==nil{
     return head
+  }
+  prev,slow,fast:= &ListNode{},head,head
+  for fast !=nil && fast.Next !=nil {
+    prev=slow
+    slow=slow.Next
+    fast=fast.Next.Next
+  }
+
+  prev.Next=nil
+  left:=sortList(head)
+  right:=sortList(slow)
+
+  return merge(left,right)
+}
+
+func merge(l1 *ListNode, l2 *ListNode) *ListNode {
+    if l1 == nil {
+        return l2
+    }
+    if l2 == nil {
+        return l1
+    }
+    
+    if l1.Val < l2.Val {
+        l1.Next = merge(l1.Next, l2)
+        return l1
+    }
+    l2.Next = merge(l1, l2.Next)
+    return l2
 }
